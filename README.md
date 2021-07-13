@@ -1,8 +1,8 @@
-# Adversarial Training with Dual Batch Normalization
+# Improving the Accuracy-Robustness Trade-Off for Dual-Domain Adversarial Training
 
 ## Authors
 
-- Annonymized authors
+Chawin Sitawarin*, Arvind Sridhar*, David Wagner (UC Berkeley)
 
 ## Abstract
 
