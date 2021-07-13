@@ -1,0 +1,14 @@
+data
+results*
+notes*
+*.out
+*.pyc
+*__pycache__*
+.vscode
+wandb*
+sweep/*
+log
+*.pkl
+*.png
+*.pdf
+*.txt

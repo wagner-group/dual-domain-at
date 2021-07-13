@@ -1,0 +1,96 @@
+# Hyperparameter configuration for training
+
+meta:
+  # Used for training and testing
+  exp_id: 1
+  dataset: 'imagenette' #Dataset: 'mnist', 'cifar10'
+  exp_core: 'resnet34'
+  exp_wrapper: 'pair_at' # TODO: Wrapper method: 'clean', 'at', 'trades', 'pair_at', 'match_at'
+  exp_attacker: 'pgd' # Evaluation attacker: 'noatt', 'pgd'
+  data_path: './data'
+  results_path: './results'
+  gpu_ids: '0'
+  random_seed: 2019
+
+train:
+  # Used for training and data loading
+  batch_size: 64
+  val_ratio: 0.1
+  num_workers: 4
+  train_epochs: 80
+  load_pretrain: False
+
+test:
+  # Used for testing
+  num_sample: 10000
+  batch_size: 200
+  exp_name: '' #Empty to use latest experiment
+  load_epoch: 80
+
+core:
+  pretrained: False
+  # Used for initializing core model
+  num_classes: 10
+  learning_rate: 0.01
+  lr_decay: 0.1
+  lr_steps: [40, 55, 70]
+  weight_decay: 0.0005
+  normalization_layer: 'bn'
+  # For DBN
+  shared_affine: True
+  temperature: 1
+  score_func: 'prob'
+  score_norm_func: 'linear'
+  combine_mode: null
+  # For GN
+  num_group: 32
+  # For clipping gradients
+  # clip_grad: 10
+  use_asc: False
+
+wrapper:
+  # Used for initializing wrapper model
+  # All
+  eps_train: 0.06274509804
+  eps_test: 0.06274509804
+
+  # TRADES
+  adv_beta: 6
+  trades_concat: True
+
+  # PairAT
+  dist_reg: 'none'
+  reg_weight: 0.
+  pair_samples: False
+  normalize_dim: False
+  concat: True
+  loss_weight: 0.5
+  pair_trades: True
+  pair_kld: False
+  pair_adv_beta: 1
+  pair_reg_use_input: True
+  track_stats: True
+
+  # MatchAT
+  match_train_mode: ['clean', 'clean', 'clean', 'clean', 'clean', 'clean', 'gmm', 
+                     'clean', 'clean', 'clean', 'clean', 'clean', 'clean', 'clean', 'clean', 'gmm',
+                     'clean', 'clean', 'clean', 'clean', 'clean', 'clean', 'clean', 'clean', 'clean', 'clean', 'clean', 'clean', 'gmm',
+                     'clean', 'clean', 'clean', 'clean', 'clean', 'clean', 'gmm',]
+  match_tune_epoch: 9999
+  match_tune_fix_bn: False
+  match_tune_fix_dbn: False
+  match_concat: True
+  match_loss_weight: 0.5
+  match_trades: False
+  match_kld: True
+  match_adv_beta: 0.2
+  match_reg_func: 'none'
+  match_reg_weight: 0
+  match_reg_use_input: False
+
+attack:
+  # Used for initializing attacker agent
+  # PGD
+  pgd_steps: 10
+  pgd_step_size: 0.01568627451
+  num_restarts: 1
